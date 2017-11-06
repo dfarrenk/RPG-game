@@ -1,0 +1,13 @@
+Characters are objects, each has
+    name
+    image
+    health value
+    attack value
+
+Player character gets copied over and has its attack value increase each round
+
+Unchosen characters get classes as enemies
+
+Player selects enemy to fight
+    Characters attack another in rounds until one is defeated
+    Repeat until player loses are defeats all enemies
