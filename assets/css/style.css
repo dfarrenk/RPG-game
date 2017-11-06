@@ -1,0 +1,128 @@
+body {
+    font-family: 'Orbitron', sans-serif;
+    background-image: url("../images/background.jpg");
+    color: white;
+}
+
+button {
+    font-family: 'Orbitron', sans-serif;
+
+}
+
+.character-box,
+.player-box,
+.enemy-box {
+    box-sizing: content-box;
+    background: #333;
+    color: ivory;
+    width: 180px;
+    height: 180px;
+    border: 6px outset aqua;
+    padding: 5px;
+    float: left;
+    text-align: center;
+}
+
+.player-box {
+    border-color: green;
+}
+
+.enemy-box {
+    border-color: red;
+}
+
+.character-title,
+.character-stats {
+    height: 10%;
+}
+
+.character-portrait {
+    width: 100%;
+    height: 80%;
+}
+
+.character-portrait img {
+    width: 100%;
+    max-height: 100%;
+}
+
+.character-selection {
+    margin: 5 px;
+}
+
+.page-title {
+    margin-top: 10px;
+    font-size: 2em;
+    text-align: center;
+}
+
+.section-header {
+    font-size: 1.4em;
+    margin: 5px;
+}
+
+.icon {
+    width: 32px;
+}
+
+@-webkit-keyframes fadeAway {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+@keyframes fadeAway {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+@-webkit-keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+.fadeAway {
+    -webkit-animation-duration: 2s;
+    animation-duration: 2s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+    -webkit-animation-name: fadeAway;
+    animation-name: fadeAway;
+}
+
+.fadeIn {
+    -webkit-animation-duration: 2s;
+    animation-duration: 2s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+    -webkit-animation-name: fadeIn;
+    animation-name: fadeIn;
+}
+
+
+
+.clearfix::after {
+    content: "";
+    display: block;
+    clear: both;
+}

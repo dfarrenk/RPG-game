@@ -11,133 +11,6 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script type="text/javascript" src="assets/javascript/game.js"></script>
 
-
-    <style>
-        body {
-            font-family: 'Orbitron', sans-serif;
-        }
-
-        button {
-            font-family: 'Orbitron', sans-serif;
-
-        }
-
-        .character-box,
-        .player-box,
-        .enemy-box {
-            box-sizing: content-box;
-            background: #333;
-            color: ivory;
-            width: 180px;
-            height: 180px;
-            border: 6px outset aqua;
-            padding: 5px;
-            float: left;
-            text-align: center;
-        }
-
-        .player-box {
-            border-color: green;
-        }
-
-        .enemy-box {
-            border-color: red;
-        }
-
-        .character-title,
-        .character-stats {
-            height: 10%;
-        }
-
-        .character-portrait {
-            width: 100%;
-            height: 80%;
-        }
-
-        .character-portrait img {
-            width: 100%;
-            max-height: 100%;
-        }
-
-        .character-selection {
-            margin: 5 px;
-        }
-
-        .page-title {
-            margin-top: 10px;
-            font-size: 2em;
-            text-align: center;
-        }
-
-        .section-header {
-            font-size: 1.4em;
-            margin: 5px;
-        }
-
-        .icon {
-            width: 32px;
-        }
-
-        @-webkit-keyframes fadeOut {
-            0% {
-                opacity: 1;
-            }
-            100% {
-                opacity: 0;
-            }
-        }
-
-        @keyframes fadeOut {
-            0% {
-                opacity: 1;
-            }
-            100% {
-                opacity: 0;
-            }
-        }
-
-        @-webkit-keyframes fadeIn {
-            0% {
-                opacity: 0;
-            }
-            100% {
-                opacity: 1;
-            }
-        }
-
-        @keyframes fadeIn {
-            0% {
-                opacity: 0;
-            }
-            100% {
-                opacity: 1;
-            }
-        }
-
-        .fadeOut {
-            -webkit-animation-duration: 2s;
-            animation-duration: 2s;
-            -webkit-animation-fill-mode: both;
-            animation-fill-mode: both;
-            -webkit-animation-name: fadeOut;
-            animation-name: fadeOut;
-        }
-
-        .fadeIn {
-            -webkit-animation-duration: 2s;
-            animation-duration: 2s;
-            -webkit-animation-fill-mode: both;
-            animation-fill-mode: both;
-            -webkit-animation-name: fadeIn;
-            animation-name: fadeIn;
-        }
-
-        .clearfix::after {
-            content: "";
-            display: block;
-            clear: both;
-        }
-    </style>
 </head>
 
 <body>
@@ -159,6 +32,21 @@
             </div>
             <p class="character-stats">HP: 200  ATK: 5 </p>
         </button>
+        <button class="character-box button" value="darthVader">
+            <h5 class="character-title">Darth Vader</h5>
+            <div class="character-portrait">
+                <img src="assets/images/Vader.jpg">
+            </div>
+            <p class="character-stats">HP: 300  ATK: 20 </p>
+        </button>
+        <button class="character-box button" value="obiWan">
+            <h5 class="character-title">Obi Wan Kenobi</h5>
+            <div class="character-portrait">
+                <img src="assets/images/obiwan.png">
+            </div>
+            <p class="character-stats">HP: 150  ATK: 15 </p>
+        </button>
+
 
     </div>
     <br>
@@ -176,7 +64,8 @@
         <p>Fight!</p>
         <img src="assets/images/lightsaber.png" class="icon">
     </button>
-
+    <button class="btn btn-warning btn-xs theme-button"><span class="glyphicon glyphicon-music"></span> Play Theme!</button>
+    <button class="btn btn-default btn-xs pause-button"><span class="glyphicon glyphicon-pause"></span> Pause Song</button>
     <script>
         var gameState = 'characterSelection';
         var playerCharacter;
@@ -192,12 +81,12 @@
 
         }
 
-        var darthJarJar = new character("Darth Jar Jar", "assets/images/darthjarjar.jpg", 100, 10, 10);
+        var darthJarJar = new character("Darth Darth Binks", "assets/images/darthjarjar.jpg", 100, 10, 10);
         var darthMaul = new character("Darth Maul", "assets/images/darthmaul.jpeg", 200, 5, 5);
+        var darthVader = new character("Darth Vader", "assets/images/Vader.jpg", 300, 20, 20);
+        var obiWan = new character("Old Ben", "assets/images/obiwan.png", 150, 15, 15);
 
-        var charactersInPlay = [darthJarJar, darthMaul];
-        var characterList = ['dartJarJar', 'darthMaul'];
-        var numberOfEnemies = 1; // number of character - 1
+        var numberOfEnemies = 3; // number of character - 1
         //Need to use <button> to hold a value field.
         $(".button").on("click", function() {
             //console.log(this.classList.contains("character-box"));
@@ -210,14 +99,21 @@
                     case 'darthMaul':
                         playerCharacter = darthMaul;
                         break;
+                    case 'darthVader':
+                        playerCharacter = darthVader;
+                        break;
+                    case 'obiWan':
+                        playerCharacter = obiWan;
+                        break;
+
                 }
                 alert("Player chose " + playerCharacter.name);
-                $(this).addClass('fadeOut');
+                $(this).addClass('fadeAway');
                 $(this).val(''); //Need to learn about timers...  For now let's just remove the value from an invisible button.
                 gameState = 'enemySelection';
-                $('.player-box').append("<h5 class='character-title'>" + playerCharacter.name + "</h5>");
-                $('.player-box').append("<div class='character-portrait'><img src='" + playerCharacter.image + "'</div>");
-                $('.player-box').append("<h6 class='player-stats' class='character-stats'>HP: " + playerCharacter.health + "  ATK: " + playerCharacter.attack + "</h6>");
+                $('.player-box').append("<h5 class='character-title fadeIn'>" + playerCharacter.name + "</h5>");
+                $('.player-box').append("<div class='character-portrait fadeIn'><img src='" + playerCharacter.image + "'</div>");
+                $('.player-box').append("<h6 class='player-stats fadeIn' class='character-stats'>HP: " + playerCharacter.health + "  ATK: " + playerCharacter.attack + "</h6>");
             }
             else if (this.classList.contains('character-box') && gameState === 'enemySelection') {
                 switch (this.value) {
@@ -227,13 +123,20 @@
                     case 'darthMaul':
                         enemyCharacter = darthMaul;
                         break;
+                    case 'darthVader':
+                        enemyCharacter = darthVader;
+                        break;
+                    case 'obiWan':
+                        enemyCharacter = obiWan;
+                        break;
                 }
                 alert("Player will fight " + enemyCharacter.name);
-                $(this).addClass('fadeOut');
+                $(this).addClass('fadeAway');
+                $(this).val('');
                 gameState = 'combat';
-                $('.enemy-box').append("<h5 class='character-title'>" + enemyCharacter.name + "</h5>");
-                $('.enemy-box').append("<div class='character-portrait'><img src='" + enemyCharacter.image + "'</div>");
-                $('.enemy-box').append("<h6 class='enemy-stats' class='character-stats'>HP: " + enemyCharacter.health + "  ATK: " + enemyCharacter.attack + "</h6>");
+                $('.enemy-box').append("<h5 class='character-title fadeIn'>" + enemyCharacter.name + "</h5>");
+                $('.enemy-box').append("<div class='character-portrait fadeIn'><img src='" + enemyCharacter.image + "'</div>");
+                $('.enemy-box').append("<h6 class='enemy-stats fadeIn' class='character-stats'>HP: " + enemyCharacter.health + "  ATK: " + enemyCharacter.attack + "</h6>");
             }
             else if (this.classList.contains('fight') && gameState === 'combat') {
                 enemyCharacter.health -= playerCharacter.attack;
@@ -244,50 +147,39 @@
                 if (enemyCharacter.health <= 0) {
                     //Are all enemies dead?
                     numberOfEnemies--;
+                    gameState = 'enemySelection';
+                    $('.enemy-box').children().removeClass('fadeIn');
+                    $('.enemy-box').children().fadeOut(1000, function() { $(this).empty(); })
                     if (numberOfEnemies <= 0) {
-                        alert("You won!");
+                        //alert("You won!");
+                        $('enemy-box').addClass('fadeAway');
+                        gameState = 'gameOver';
                     }
                 }
                 else {
                     playerCharacter.health -= enemyCharacter.counterAttack;
                     $('.player-stats').text('HP: ' + playerCharacter.health + '  ATK: ' + playerCharacter.attack);
+                    if (playerCharacter.health <= 0) {
+                        //alert("You lost!")
+                        $('.player-box').addClass('fadeAway');
+                        $('.player-box').empty();
+                        gameState = 'gameOver';
+                    }
                 }
-                playerCharacter.health -= enemyCharacter.counterAttack;
-                //Check if fight is lost
-
-
             }
-
-
         })
+        var audioElement = document.createElement("audio");
+        audioElement.setAttribute("src", "assets/cantina.mp3");
 
-        //use .eval() to convert string text to variable name
+        // Theme Button
+        $(".theme-button").on("click", function() {
+            audioElement.play();
+        });
+
+        $(".pause-button").on("click", function() {
+            audioElement.pause();
+        });
     </script>
 </body>
 
 </html>
-
-<!--
-<body>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-offset-2 col-md-8">
-                <div class="jumbotron" id="game">
-                    <h1>Press any key to start <img class="triforce" src="assets/images/triforce.png"></h1>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-offset-2 col-md-8">
-                <div class="jumbotron">
-                    <h3>Hint: <span id="hint">Unlocked with 4 guesses left</span></h3>
-                    <h3>Lives left: <span id="player-lives">9</span></h3>
-                    <h3>Wins: <span id="player-wins">0</span></h3>
-                    <h3>Losses: <span id="player-losses">0</h3>
-                </div>
-            </div>
-        </div>
-    </div>
-
-</body>
--->
